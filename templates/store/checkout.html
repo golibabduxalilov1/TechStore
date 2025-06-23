@@ -1,0 +1,82 @@
+{% extends 'store/_base.html' %}
+
+{% block title %}
+  Checkout - Electronics Shop
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8">
+        <h2 class="mb-4">Checkout</h2>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="mb-0">Order Summary</h5>
+          </div>
+          <div class="card-body">
+            {% for item in cart_items %}
+              <div class="row align-items-center border-bottom py-3">
+                <div class="col-md-2">
+                  <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid rounded" />
+                </div>
+                <div class="col-md-6">
+                  <h6 class="mb-1">{{ item.product.name }}</h6>
+                  <small class="text-muted">{{ item.product.brand }}</small>
+                </div>
+                <div class="col-md-2">
+                  <span class="badge bg-secondary">Qty: {{ item.quantity }}</span>
+                </div>
+                <div class="col-md-2">
+                  <strong>${{ item.total_price }}</strong>
+                </div>
+              </div>
+            {% endfor %}
+
+            <div class="row mt-3">
+              <div class="col-md-8">
+                <h5>Total Amount:</h5>
+              </div>
+              <div class="col-md-4">
+                <h5 class="text-success">${{ total }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Shipping Information</h5>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="{{ form.shipping_address.id_for_label }}" class="form-label">Shipping Address</label>
+                {{ form.shipping_address }}
+                {% if form.shipping_address.errors %}
+                  <div class="text-danger small">{{ form.shipping_address.errors }}</div>
+                {% endif %}
+              </div>
+
+              <div class="mb-3">
+                <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number</label>
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                  <div class="text-danger small">{{ form.phone.errors }}</div>
+                {% endif %}
+              </div>
+
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success btn-lg">Place Order - ${{ total }}</button>
+                <a href="{% url 'cart_view' %}" class="btn btn-outline-secondary">Back to Cart</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,95 @@
+<!-- home.html -->
+{% extends 'store/_base.html' %}
+{% load static %}
+
+{% block title %}
+  Home - Fashion Store
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+  <!-- Hero Banner Section -->
+  <section class="hero-banner">
+    <div class="container hero-content">
+      <div class="row align-items-center h-100">
+        <div class="col-lg-6 col-md-8">
+          <div class="hero-text">
+            <h3 class="collection-title">Woman Collection 2024</h3>
+            <h1 class="banner-title">NEW SEASON</h1>
+            <a href="{% url 'product_list' %}" class="btn btn-hero">SHOP NOW</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="category-section">
+    <div class="container">
+      <div class="row g-4">
+        {% for category in categories %}
+          <div class="col-lg-4 col-md-6">
+            <div class="category-card">
+              <a href="{% url 'product_list' %}?category={{ category.slug }}">
+                <div class="category-overlay">
+                  <div class="category-text">
+                    <h3 class="category-title">{{ category.name }}</h3>
+                    <p class="category-subtitle">New Collection</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        {% empty %}
+          <!-- Demo products if no categories available -->
+          <h5 class="product-name">Products if no categories available</h5>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Overview Section -->
+  <section class="product-overview">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">PRODUCT OVERVIEW</h2>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="row product-grid g-4">
+        {% for product in featured_products %}
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="product-card">
+              <div class="product-image">
+                <a href="{% url 'product_detail' product.slug %}">
+                  {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid" />
+                  {% else %}
+                    <img src="https://placehold.co/600x400?text={{ product.name|truncatechars:8 }}" alt="{{ product.name }}" class="img-fluid" />
+                  {% endif %}
+                </a>
+              </div>
+              <div class="product-info">
+                <h5 class="product-name">{{ product.name|truncatechars:30 }}</h5>
+                <p class="product-price">${{ product.price }}</p>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <!-- Demo products if no products available -->
+          <h5 class="product-name">Products if no products available</h5>
+        {% endfor %}
+      </div>
+
+      <!-- Load More Button -->
+      <div class="text-center mt-5">
+        <a href="{% url 'product_list' %}" class="btn btn-load-more">LOAD MORE</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
