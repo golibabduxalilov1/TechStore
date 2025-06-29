@@ -1,125 +1,139 @@
 {% extends 'store/_base.html' %}
+{% load static %}
 
 {% block title %}
   Order #{{ order.id }} - Electronics Shop
 {% endblock %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/order_detail.css' %}" />
+{% endblock %}
+
 {% block content %}
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2>Order #{{ order.id }}</h2>
-          <a href="{% url 'order_history' %}" class="btn btn-outline-primary"><i class="bi bi-arrow-left"></i> Back to Orders</a>
+  <!-- Order Details Section -->
+  <section class="order-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title mb-0">Order History</h2>
+            <a href="{% url 'order_history' %}" class="btn border continue-shopping"><i class="fas fa-arrow-left me-2"></i>Back to Orders</a>
+          </div>
         </div>
-
-        <div class="row">
-          <div class="col-md-8">
-            <div class="card mb-4">
-              <div class="card-header">
-                <h5 class="mb-0">Order Items</h5>
-              </div>
-              <div class="card-body">
-                {% for item in order_items %}
-                  <div class="row align-items-center border-bottom py-3">
-                    <div class="col-md-2">
-                      <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid rounded" />
+        <!-- Order Items Column -->
+        <div class="col-lg-8">
+          <div class="order-card">
+            <div class="card-header-custom">
+              <h5><i class="fas fa-shopping-bag me-2"></i>Order Items</h5>
+            </div>
+            <div class="card-body-custom">
+              {% for item in order_items %}
+                <div class="order-item">
+                  <div class="row align-items-center">
+                    <div class="col-md-2 col-3">
+                      <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="product-image-order" />
                     </div>
-                    <div class="col-md-5">
-                      <h6 class="mb-1">{{ item.product.name }}</h6>
-                      <small class="text-muted">{{ item.product.brand }}</small>
+                    <div class="col-md-5 col-9">
+                      <h6 class="product-name-order">{{ item.product.name }}</h6>
+                      <p class="product-brand mb-0">{{ item.product.brand }}</p>
                     </div>
-                    <div class="col-md-2">
-                      <span class="badge bg-secondary">Qty: {{ item.quantity }}</span>
+                    <div class="col-md-2 col-4 text-center">
+                      <span class="quantity-badge">Qty: {{ item.quantity }}</span>
                     </div>
-                    <div class="col-md-2">
-                      <span class="text-muted">${{ item.price }} each</span>
+                    <div class="col-md-2 col-4 text-center">
+                      <span class="price-text">${{ item.price }} each</span>
                     </div>
-                    <div class="col-md-1">
-                      <strong>${{ item.total_price }}</strong>
+                    <div class="col-md-1 col-4 text-end">
+                      <strong class="total-price">${{ item.total_price }}</strong>
                     </div>
                   </div>
-                {% endfor %}
+                </div>
+              {% endfor %}
 
-                <div class="row mt-3 pt-3 border-top">
+              <div class="order-total">
+                <div class="row align-items-center">
                   <div class="col-md-8">
-                    <h5>Total Amount:</h5>
+                    <h5><i class="fas fa-calculator me-2"></i>Total Amount:</h5>
                   </div>
-                  <div class="col-md-4">
-                    <h5 class="text-success">${{ order.total_amount }}</h5>
+                  <div class="col-md-4 text-end">
+                    <h5 class="total-amount">${{ order.total_amount }}</h5>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="col-md-4">
-            <div class="card mb-4">
-              <div class="card-header">
-                <h5 class="mb-0">Order Information</h5>
+        <!-- Order Information Column -->
+        <div class="col-lg-4">
+          <!-- Order Information Card -->
+          <div class="order-card">
+            <div class="card-header-custom">
+              <h5><i class="fas fa-info-circle me-2"></i>Order Information</h5>
+            </div>
+            <div class="card-body-custom">
+              <div class="mb-3">
+                <div class="info-label">Order Date:</div>
+                <div class="info-value">{{ order.created_at|date:'F d, Y H:i' }}</div>
               </div>
-              <div class="card-body">
-                <div class="mb-3">
-                  <label class="form-label text-muted">Order Date:</label>
-                  <div>{{ order.created_at|date:'F d, Y H:i' }}</div>
-                </div>
 
-                <div class="mb-3">
-                  <label class="form-label text-muted">Order Status:</label>
-                  <div>
-                    {% if order.status == 'pending' %}
-                      <span class="badge bg-warning">{{ order.get_status_display }}</span>
-                    {% elif order.status == 'processing' %}
-                      <span class="badge bg-info">{{ order.get_status_display }}</span>
-                    {% elif order.status == 'shipped' %}
-                      <span class="badge bg-primary">{{ order.get_status_display }}</span>
-                    {% elif order.status == 'delivered' %}
-                      <span class="badge bg-success">{{ order.get_status_display }}</span>
-                    {% elif order.status == 'cancelled' %}
-                      <span class="badge bg-danger">{{ order.get_status_display }}</span>
-                    {% endif %}
-                  </div>
+              <div class="mb-3">
+                <div class="info-label">Order Status:</div>
+                <div>
+                  {% if order.status == 'pending' %}
+                    <span class="status-badge status-pending">{{ order.get_status_display }}</span>
+                  {% elif order.status == 'processing' %}
+                    <span class="status-badge status-processing">{{ order.get_status_display }}</span>
+                  {% elif order.status == 'shipped' %}
+                    <span class="status-badge status-shipped">{{ order.get_status_display }}</span>
+                  {% elif order.status == 'delivered' %}
+                    <span class="status-badge status-delivered">{{ order.get_status_display }}</span>
+                  {% elif order.status == 'cancelled' %}
+                    <span class="status-badge status-cancelled">{{ order.get_status_display }}</span>
+                  {% endif %}
                 </div>
+              </div>
 
-                <div class="mb-3">
-                  <label class="form-label text-muted">Phone Number:</label>
-                  <div>{{ order.phone }}</div>
-                </div>
+              <div class="mb-3">
+                <div class="info-label">Phone Number:</div>
+                <div class="info-value">{{ order.phone }}</div>
+              </div>
 
-                <div class="mb-3">
-                  <label class="form-label text-muted">Shipping Address:</label>
-                  <div>{{ order.shipping_address|linebreaks }}</div>
-                </div>
+              <div class="mb-3">
+                <div class="info-label">Shipping Address:</div>
+                <div class="info-value">{{ order.shipping_address|linebreaks }}</div>
               </div>
             </div>
+          </div>
 
-            <div class="card">
-              <div class="card-header">
-                <h5 class="mb-0">Order Actions</h5>
-              </div>
-              <div class="card-body">
-                {% if order.status == 'pending' %}
-                  <div class="alert alert-info mb-3">
-                    <small>Your order is being processed. You will receive a confirmation soon.</small>
-                  </div>
-                {% elif order.status == 'shipped' %}
-                  <div class="alert alert-primary mb-3">
-                    <small>Your order has been shipped and is on its way!</small>
-                  </div>
-                {% elif order.status == 'delivered' %}
-                  <div class="alert alert-success mb-3">
-                    <small>Your order has been delivered. Thank you for shopping with us!</small>
-                  </div>
-                {% endif %}
-
-                <div class="d-grid">
-                  <a href="{% url 'home' %}" class="btn btn-primary">Continue Shopping</a>
+          <!-- Order Actions Card -->
+          <div class="order-card">
+            <div class="card-header-custom">
+              <h5><i class="fas fa-cogs me-2"></i>Order Actions</h5>
+            </div>
+            <div class="card-body-custom">
+              {% if order.status == 'pending' %}
+                <div class="alert-custom alert-info-custom">
+                  <i class="fas fa-clock me-2"></i>
+                  Your order is being processed. You will receive a confirmation soon.
                 </div>
-              </div>
+              {% elif order.status == 'shipped' %}
+                <div class="alert-custom alert-primary-custom">
+                  <i class="fas fa-shipping-fast me-2"></i>
+                  Your order has been shipped and is on its way!
+                </div>
+              {% elif order.status == 'delivered' %}
+                <div class="alert-custom alert-success-custom">
+                  <i class="fas fa-check-circle me-2"></i>
+                  Your order has been delivered. Thank you for shopping with us!
+                </div>
+              {% endif %}
+
+              <a href="{% url 'home' %}" class="continue-shopping-btn"><i class="fas fa-shopping-cart me-2"></i>Continue Shopping</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 {% endblock %}

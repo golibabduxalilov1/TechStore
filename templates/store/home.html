@@ -31,6 +31,9 @@
   <!-- Categories Section -->
   <section class="category-section">
     <div class="container">
+      <div class="section-header">
+        <h2 class="section-title text-uppercase">recently categories</h2>
+      </div>
       <div class="row g-4">
         {% for category in categories %}
           <div class="col-lg-4 col-md-6">
@@ -38,7 +41,7 @@
               <a href="{% url 'product_list' %}?category={{ category.slug }}">
                 <div class="category-overlay">
                   <div class="category-text text-center">
-                    <h3 class="category-title">{{ category.name }}</h3>
+                    <h3 class="category-title text-capitalize">{{ category.name }}</h3>
                     <p class="category-subtitle">New Collection</p>
                   </div>
                 </div>
@@ -52,7 +55,6 @@
       </div>
     </div>
   </section>
-
   <!-- Product Overview Section -->
   <section class="product-overview">
     <div class="container">

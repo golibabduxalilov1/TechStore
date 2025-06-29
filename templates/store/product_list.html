@@ -1,109 +1,124 @@
 {% extends 'store/_base.html' %}
-
+{% load static %}
 {% block title %}
   Products - Electronics Shop
 {% endblock %}
 
-{% block content %}
-  <div class="container py-4">
-    <div class="row">
-      <!-- Sidebar -->
-      <div class="col-lg-3 mb-4">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="mb-0">Search</h5>
-          </div>
-          <div class="card-body">
-            <form method="GET" action="{% url 'product_list' %}">
-              <div class="mb-3">
-                <input type="text" class="form-control" name="search" placeholder="Search products..." value="{{ request.GET.search }}" />
-              </div>
-              {% if current_category %}
-                <input type="hidden" name="category" value="{{ current_category }}" />
-              {% endif %}
-              <button type="submit" class="btn btn-primary w-100"><i class="fas fa-search me-2"></i>Search</button>
-            </form>
-          </div>
-        </div>
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/product_list.css' %}" />
+{% endblock %}
 
-        <div class="card mt-3">
-          <div class="card-header">
-            <h5 class="mb-0">Categories</h5>
+{% block content %}
+  <div class="main-content">
+    <div class="container">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
+          <!-- Search Card -->
+          <div class="card sidebar-card">
+            <div class="card-header">
+              <h5 class="mb-0"><i class="fas fa-search me-2"></i>Search</h5>
+            </div>
+            <div class="card-body">
+              <form method="GET" action="{% url 'product_list' %}">
+                <div class="mb-3">
+                  <input type="text" class="form-control search-input" name="search" placeholder="Search products..." value="{{ request.GET.search }}" />
+                </div>
+                {% if current_category %}
+                  <input type="hidden" name="category" value="{{ current_category }}" />
+                {% endif %}
+                <button type="submit" class="btn btn-search w-100"><i class="fas fa-search me-2"></i>Search</button>
+              </form>
+            </div>
           </div>
-          <div class="card-body">
-            <div class="list-group list-group-flush">
-              <a href="{% url 'product_list' %}" class="list-group-item list-group-item-action {% if not current_category %}active{% endif %}">All Products</a>
-              {% for category in categories %}
-                <a href="{% url 'product_list' %}?category={{ category.slug }}" class="list-group-item list-group-item-action {% if current_category == category.slug %}active{% endif %}">{{ category.name }}</a>
-              {% endfor %}
+
+          <!-- Categories Card -->
+          <div class="card sidebar-card">
+            <div class="card-header">
+              <h5 class="mb-0"><i class="fas fa-list me-2"></i>Categories</h5>
+            </div>
+            <div class="card-body">
+              <div class="category-list">
+                <a href="{% url 'product_list' %}" class="category-item d-block {% if not current_category %}active{% endif %}"><i class="fas fa-th-large me-2"></i>All Products</a>
+                {% for category in categories %}
+                  <a href="{% url 'product_list' %}?category={{ category.slug }}" class="category-item d-block {% if current_category == category.slug %}active{% endif %}"><i class="fas fa-tag me-2"></i>{{ category.name }}</a>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Products -->
-      <div class="col-lg-9">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2>
-            {% if current_category %}
-              {% for category in categories %}
-                {% if category.slug == current_category %}
-                  {{ category.name }}
+        <!-- Products -->
+        <div class="col-lg-9">
+          <!-- Products Header -->
+          <div class="products-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <h2 class="products-title">
+                {% if current_category %}
+                  {% for category in categories %}
+                    {% if category.slug == current_category %}
+                      {{ category.name }}
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  All Products
                 {% endif %}
-              {% endfor %}
-            {% else %}
-              All Products
-            {% endif %}
-          </h2>
-          <span class="text-muted">{{ products.count }} products found</span>
-        </div>
+              </h2>
+              <span class="products-count">{{ products.count }} products found</span>
+            </div>
+          </div>
 
-        {% if products %}
-          <div class="row">
-            {% for product in products %}
-              <div class="col-md-6 col-xl-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                  {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 250px; object-fit: cover;" />
-                  {% else %}
-                    <img src="https://via.placeholder.com/300x250/6c757d/ffffff?text={{ product.name|truncatechars:10 }}" class="card-img-top" alt="{{ product.name }}" />
-                  {% endif %}
+          <!-- Products Grid -->
+          {% if products %}
+            <div class="row">
+              {% for product in products %}
+                <div class="col-md-6 col-xl-4 mb-4">
+                  <div class="card product-card h-100">
+                    <div class="product-image">
+                      {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                      {% else %}
+                        <img src="https://via.placeholder.com/300x250/6c757d/ffffff?text={{ product.name|truncatechars:10 }}" alt="{{ product.name }}" />
+                      {% endif %}
+                    </div>
 
-                  <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ product.name|truncatechars:40 }}</h5>
-                    <p class="card-text text-muted small">{{ product.brand }}</p>
-                    <p class="card-text">{{ product.description|truncatechars:80 }}</p>
+                    <div class="card-body product-body d-flex flex-column">
+                      <h5 class="product-title">{{ product.name|truncatechars:40 }}</h5>
+                      <p class="product-brand">{{ product.brand }}</p>
+                      <p class="product-description">{{ product.description|truncatechars:80 }}</p>
 
-                    <div class="mt-auto">
-                      <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="fw-bold text-primary fs-5">${{ product.price }}</span>
-                        {% if product.stock > 0 %}
-                          <span class="badge bg-success">In Stock</span>
-                        {% else %}
-                          <span class="badge bg-danger">Out of Stock</span>
-                        {% endif %}
-                      </div>
+                      <div class="mt-1">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <span class="product-price">${{ product.price }}</span>
+                          {% if product.stock > 0 %}
+                            <span class="stock-badge in-stock">In Stock</span>
+                          {% else %}
+                            <span class="stock-badge out-of-stock">Out of Stock</span>
+                          {% endif %}
+                        </div>
 
-                      <div class="btn-group w-100" role="group">
-                        <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline-primary">View</a>
-                        {% if user.is_authenticated and product.stock > 0 %}
-                          <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
-                        {% endif %}
+                        <div class="btn-group w-100 product-buttons" role="group">
+                          <a href="{% url 'product_detail' product.slug %}" class="btn btn-view"><i class="fas fa-eye me-1"></i>View</a>
+                          {% if user.is_authenticated and product.stock > 0 %}
+                            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-cart"><i class="fas fa-shopping-cart me-1"></i>Add to Cart</a>
+                          {% endif %}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            {% endfor %}
-          </div>
-        {% else %}
-          <div class="text-center py-5">
-            <i class="fas fa-search fa-3x text-muted mb-3"></i>
-            <h4 class="text-muted">No products found</h4>
-            <p class="text-muted">Try adjusting your search criteria</p>
-            <a href="{% url 'product_list' %}" class="btn btn-primary">View All Products</a>
-          </div>
-        {% endif %}
+              {% endfor %}
+            </div>
+          {% else %}
+            <!-- No Products Found -->
+            <div class="no-products">
+              <i class="fas fa-search fa-4x"></i>
+              <h4>No products found</h4>
+              <p>Try adjusting your search criteria or browse our categories</p>
+              <a href="{% url 'product_list' %}" class="btn-back-to-products"><i class="fas fa-arrow-left me-2"></i>View All Products</a>
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>

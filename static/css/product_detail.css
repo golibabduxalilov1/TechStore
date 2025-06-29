@@ -370,7 +370,7 @@
 /* Product Info */
 .product-info {
   background: #f8f9fa;
-  padding: 25px;
+  padding: 30px;
   border-radius: 15px;
   margin-bottom: 20px;
 }
@@ -378,7 +378,7 @@
 .info-item {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 10px 10px;
   border-bottom: 1px solid #dee2e6;
   font-size: 1rem;
 }

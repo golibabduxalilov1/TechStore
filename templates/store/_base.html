@@ -15,95 +15,98 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
-        /* Footer */
-        .footer {
-            background-color: #222;
-            color: #aaa;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .footer-title {
-            color: white;
-            font-size: 16px;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section a {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #6c7ae0;
-        }
-
-        .contact-info {
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            color: white;
-            font-size: 16px;
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .newsletter-form input {
-            padding: 12px;
-            margin-bottom: 15px;
-            border: none;
-            background-color: #333;
-            color: white;
-            border-radius: 4px;
-        }
-
-        .newsletter-form input::placeholder {
-            color: #aaa;
-        }
-
-        .subscribe-btn {
-            align-self: flex-start;
-            background-color: #6c7ae0;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 20px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .subscribe-btn:hover {
-            background-color: #5c68c8;
-        }
+      body {
+        font-family: 'Playfair Display', sans-serif !important;
+      }
+      /* Footer */
+      .footer {
+        background-color: #222;
+        color: #aaa;
+        padding: 60px 0 30px;
+      }
+      
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+      
+      .footer-title {
+        color: white;
+        font-size: 16px;
+        margin-bottom: 25px;
+        font-weight: 600;
+      }
+      
+      .footer-section ul {
+        list-style: none;
+      }
+      
+      .footer-section li {
+        margin-bottom: 10px;
+      }
+      
+      .footer-section a {
+        color: #aaa;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+      
+      .footer-section a:hover {
+        color: #6c7ae0;
+      }
+      
+      .contact-info {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      
+      .social-icons {
+        display: flex;
+        gap: 15px;
+      }
+      
+      .social-icons a {
+        color: white;
+        font-size: 16px;
+      }
+      
+      .newsletter-form {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .newsletter-form input {
+        padding: 12px;
+        margin-bottom: 15px;
+        border: none;
+        background-color: #333;
+        color: white;
+        border-radius: 4px;
+      }
+      
+      .newsletter-form input::placeholder {
+        color: #aaa;
+      }
+      
+      .subscribe-btn {
+        align-self: flex-start;
+        background-color: #6c7ae0;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 20px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      .subscribe-btn:hover {
+        background-color: #5c68c8;
+      }
     </style>
 
     {% block extra_css %}
@@ -136,13 +139,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'order_history' %}">Orders</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"><i class="fas fa-user"></i> {{ user.username }}</a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                  </li>
-                </ul>
+              <li class="nav-item">
+                <a class="nav-link" href="#" role="button"><i class="fas fa-user"></i> {{ user.username }}</a>
+              </li>
+              <li class="nav-item">
+                <form method="POST" action="{% url 'logout' %}" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="nav-link">Logout</button>
+                </form>
               </li>
             {% else %}
               <li class="nav-item">
@@ -175,49 +179,62 @@
 
       {% endblock %}
     </main>
-   <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section categories">
-                    <h3 class="footer-title">CATEGORIES</h3>
-                    <ul>
-                        <li><a href="#">Women</a></li>
-                        <li><a href="#">Men</a></li>
-                        <li><a href="#">Shoes</a></li>
-                        <li><a href="#">Watches</a></li>
-                    </ul>
-                </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section categories">
+            <h3 class="footer-title">CATEGORIES</h3>
+            <ul>
+              <li>
+                <a href="#">Women</a>
+              </li>
+              <li>
+                <a href="#">Men</a>
+              </li>
+              <li>
+                <a href="#">Shoes</a>
+              </li>
+              <li>
+                <a href="#">Watches</a>
+              </li>
+            </ul>
+          </div>
 
-                <div class="footer-section help">
-                    <h3 class="footer-title">HELP</h3>
-                    <ul>
-                        <li><a href="#">Track Order</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
+          <div class="footer-section help">
+            <h3 class="footer-title">HELP</h3>
+            <ul>
+              <li>
+                <a href="#">Track Order</a>
+              </li>
+              <li>
+                <a href="#">Returns</a>
+              </li>
+              <li>
+                <a href="#">Shipping</a>
+              </li>
+              <li>
+                <a href="#">FAQs</a>
+              </li>
+            </ul>
+          </div>
 
-                <div class="footer-section get-in-touch">
-                    <h3 class="footer-title">GET IN TOUCH</h3>
-                    <p class="contact-info">
-                        Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-                    </p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
+          <div class="footer-section get-in-touch">
+            <h3 class="footer-title">GET IN TOUCH</h3>
+            <p class="contact-info">Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
+          </div>
         </div>
+      </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block extra_js %}
-
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% endblock %}
   </body>
 </html>

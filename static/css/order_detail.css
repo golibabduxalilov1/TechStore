@@ -1,0 +1,312 @@
+/* Order Detail Specific Styles */
+.order-section {
+  padding: 80px 0;
+  background-color: #fafafa;
+  font-family: "Poppins", sans-serif;
+}
+
+.order-header {
+  background: linear-gradient(135deg, #6c7ae0, #5c68c8);
+  color: white;
+  padding: 40px 0;
+  margin-bottom: 50px;
+}
+
+.order-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.order-card {
+  background: white;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: none;
+  overflow: hidden;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.card-header-custom {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-bottom: 1px solid #e6e6e6;
+  padding: 20px 25px;
+}
+
+.card-header-custom h5 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.card-body-custom {
+  padding: 25px;
+}
+
+.order-item {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.product-image-order {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-name-order {
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.product-brand {
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+}
+
+.quantity-badge {
+  background: linear-gradient(135deg, #6c7ae0, #5c68c8);
+  color: white;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.price-text {
+  color: #666;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.total-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.order-total {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.order-total h5 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.total-amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: #28a745;
+  margin: 0;
+}
+
+.info-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.info-value {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-pending {
+  background: linear-gradient(135deg, #ffc107, #ff9800);
+  color: white;
+}
+
+.status-processing {
+  background: linear-gradient(135deg, #17a2b8, #007bff);
+  color: white;
+}
+
+.status-shipped {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+}
+
+.status-delivered {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.status-cancelled {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.alert-custom {
+  border: none;
+  padding: 15px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.alert-info-custom {
+  background: linear-gradient(
+    135deg,
+    rgba(23, 162, 184, 0.1),
+    rgba(0, 123, 255, 0.1)
+  );
+  color: #0c5460;
+  border-left: 4px solid #17a2b8;
+}
+
+.alert-primary-custom {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 123, 255, 0.1),
+    rgba(0, 86, 179, 0.1)
+  );
+  color: #004085;
+  border-left: 4px solid #007bff;
+}
+
+.alert-success-custom {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 167, 69, 0.1),
+    rgba(32, 201, 151, 0.1)
+  );
+  color: #155724;
+  border-left: 4px solid #28a745;
+}
+
+.continue-shopping-btn {
+  background: linear-gradient(135deg, #6c7ae0, #5c68c8);
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.continue-shopping-btn:hover {
+  background: linear-gradient(135deg, #5c68c8, #4a56b8);
+  box-shadow: 0 5px 15px rgba(108, 122, 224, 0.4);
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-section {
+    padding: 50px 0;
+  }
+
+  .order-header {
+    padding: 30px 0;
+    margin-bottom: 30px;
+  }
+
+  .order-title {
+    font-size: 2rem;
+  }
+
+  .card-body-custom {
+    padding: 20px;
+  }
+
+  .order-item {
+    padding: 15px 0;
+  }
+
+  .product-image-order {
+    width: 60px;
+    height: 60px;
+  }
+
+  .product-name-order {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .order-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .back-btn {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+
+  .card-header-custom {
+    padding: 15px 20px;
+  }
+
+  .card-header-custom h5 {
+    font-size: 16px;
+  }
+
+  .card-body-custom {
+    padding: 15px;
+  }
+
+  .order-item:hover {
+    margin: 0 -15px;
+    padding: 15px;
+  }
+}

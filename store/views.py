@@ -9,8 +9,8 @@ from .forms import OrderForm
 
 
 def home(req):
-    featured_products = Product.objects.filter(is_available=True)[:8]
-    categories = Category.objects.all()
+    featured_products = Product.objects.filter(is_available=True)[:12]
+    categories = Category.objects.all().order_by('-created_at')[:6]
     context = {
         "featured_products": featured_products,
         "categories": categories,
@@ -150,14 +150,14 @@ def checkout(req):
     else:
         form = OrderForm()
 
-        context = {
-            "form": form,
-            "cart_items": cart_items,
-            "order": order,
-        }
+    # Remove 'order' from context since it's not defined for GET requests
+    context = {
+        "form": form,
+        "cart_items": cart_items,
+        "total": total,  # Add total to context instead
+    }
 
     return render(req, "store/checkout.html", context)
-
 
 # --------------------- ORDER DETAIL ---------------------
 @login_required
