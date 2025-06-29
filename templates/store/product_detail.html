@@ -68,10 +68,14 @@
 
             {% if user.is_authenticated %}
               {% if product.stock > 0 %}
-                <button class="add-to-cart-btn" onclick="addToCart({{ product.id }})">
-                  <i class="fas fa-shopping-cart"></i>
-                  ADD TO CART
-                </button>
+                <form>
+                  {% csrf_token %}
+
+                  <button class="add-to-cart-btn" onclick="addToCart({{ product.id }})">
+                    <i class="fas fa-shopping-cart"></i>
+                    ADD TO CART
+                  </button>
+                </form>
               {% else %}
                 <button class="add-to-cart-btn disabled" disabled>
                   <i class="fas fa-times"></i>

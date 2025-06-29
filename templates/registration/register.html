@@ -6,17 +6,296 @@
     <title>Register - Electronics Shop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      /* Global Styles */
+      body {
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #6c7ae0 0%, #5c68c8 100%);
+        min-height: 100vh;
+      }
+      
+      /* Registration Container */
+      .register-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+      
+      .register-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        border: none;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.6s ease forwards;
+      }
+      
+      .register-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+      }
+      
+      .card-body {
+        padding: 3rem !important;
+      }
+      
+      /* Header Section */
+      .register-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+      
+      .register-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        letter-spacing: 1px;
+      }
+      
+      .register-subtitle {
+        color: #666;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      
+      /* Form Styles */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      
+      .form-label {
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+      }
+      
+      .form-label i {
+        color: #6c7ae0;
+        margin-right: 0.5rem;
+      }
+      
+      .form-control {
+        border: 2px solid #e6e6e6;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #fafafa;
+      }
+      
+      .form-control:focus {
+        border-color: #6c7ae0;
+        box-shadow: 0 0 0 0.2rem rgba(108, 122, 224, 0.15);
+        background-color: white;
+        transform: translateY(-1px);
+      }
+      
+      .form-control.is-invalid {
+        border-color: #dc3545;
+        background-color: #fff5f5;
+      }
+      
+      .form-control.is-invalid:focus {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+      }
+      
+      /* Alert Styles */
+      .alert {
+        border: none;
+        border-radius: 12px;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        animation: slideInDown 0.4s ease;
+      }
+      
+      .alert-danger {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        color: white;
+      }
+      
+      .alert-success {
+        background: linear-gradient(135deg, #51cf66, #40c057);
+        color: white;
+      }
+      
+      /* Button Styles */
+      .btn-register {
+        background: linear-gradient(135deg, #6c7ae0, #5c68c8);
+        border: none;
+        color: #fff;
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+      
+      .btn-register:hover {
+        background: linear-gradient(135deg, #5c68c8, #4c59b0);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(108, 122, 224, 0.4);
+        color: #fff;
+      }
+      
+      .btn-register:active {
+        transform: translateY(0);
+      }
+      
+      /* Form Help Text */
+      .form-text {
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.5rem;
+      }
+      
+      .form-text ul {
+        margin: 0.5rem 0 0 0;
+        padding-left: 1rem;
+      }
+      
+      .form-text li {
+        margin-bottom: 0.25rem;
+        color: #555;
+      }
+      
+      /* Invalid Feedback */
+      .invalid-feedback {
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+      }
+      
+      /* Navigation Links */
+      .register-links {
+        text-align: center;
+        padding-top: 1rem;
+        border-top: 1px solid #e6e6e6;
+      }
+      
+      .register-links a {
+        color: #6c7ae0;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      
+      .register-links a:hover {
+        color: #5c68c8;
+        text-decoration: underline;
+      }
+      
+      .back-to-store {
+        text-align: center;
+        margin-top: 2rem;
+      }
+      
+      .back-to-store a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-weight: 400;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+      
+      .back-to-store a:hover {
+        color: white;
+        text-decoration: underline;
+      }
+      
+      .back-to-store i {
+        margin-right: 0.5rem;
+      }
+      
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes slideInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .register-container {
+          padding: 40px 0;
+        }
+      
+        .card-body {
+          padding: 2rem !important;
+        }
+      
+        .register-title {
+          font-size: 1.8rem;
+        }
+      
+        .btn-register {
+          font-size: 1rem;
+          padding: 10px 25px;
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .card-body {
+          padding: 1.5rem !important;
+        }
+      
+        .register-title {
+          font-size: 1.6rem;
+        }
+      
+        .form-control {
+          padding: 10px 14px;
+        }
+      
+        .btn-register {
+          font-size: 0.95rem;
+          padding: 10px 20px;
+        }
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
   </head>
-  <body class="bg-light">
+  <body>
     <div class="container">
-      <div class="row justify-content-center min-vh-100 align-items-center py-5">
+      <div class="row justify-content-center register-container">
         <div class="col-md-6 col-lg-5">
-          <div class="card shadow-sm border-0">
-            <div class="card-body p-5">
-              <div class="text-center mb-4">
-                <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
-                <h2 class="card-title">Electronics Shop</h2>
-                <p class="text-muted">Create your account</p>
+          <div class="card register-card">
+            <div class="card-body">
+              <div class="register-header">
+                <h2 class="register-title">Electronics Shop</h2>
+                <p class="register-subtitle">Create your account</p>
               </div>
 
               {% if messages %}
@@ -31,9 +310,9 @@
               <form method="post">
                 {% csrf_token %}
 
-                <div class="mb-3">
-                  <label for="{{ form.username.id_for_label }}" class="form-label"><i class="fas fa-user me-2"></i>Username</label>
-                  <input type="text" class="form-control form-control-lg {% if form.username.errors %}is-invalid{% endif %}" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" value="{{ form.username.value|default:'' }}" placeholder="Choose a username" required />
+                <div class="form-group">
+                  <label for="{{ form.username.id_for_label }}" class="form-label"><i class="fas fa-user"></i>Username</label>
+                  <input type="text" class="form-control {% if form.username.errors %}is-invalid{% endif %}" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" value="{{ form.username.value|default:'' }}" placeholder="Choose a username" required />
                   {% if form.username.errors %}
                     <div class="invalid-feedback">{{ form.username.errors.0 }}</div>
                   {% else %}
@@ -43,28 +322,26 @@
                   {% endif %}
                 </div>
 
-                <div class="mb-3">
-                  <label for="{{ form.password1.id_for_label }}" class="form-label"><i class="fas fa-lock me-2"></i>Password</label>
-                  <input type="password" class="form-control form-control-lg {% if form.password1.errors %}is-invalid{% endif %}" id="{{ form.password1.id_for_label }}" name="{{ form.password1.name }}" placeholder="Create a password" required />
+                <div class="form-group">
+                  <label for="{{ form.password1.id_for_label }}" class="form-label"><i class="fas fa-lock"></i>Password</label>
+                  <input type="password" class="form-control {% if form.password1.errors %}is-invalid{% endif %}" id="{{ form.password1.id_for_label }}" name="{{ form.password1.name }}" placeholder="Create a password" required />
                   {% if form.password1.errors %}
                     <div class="invalid-feedback">{{ form.password1.errors.0 }}</div>
                   {% else %}
                     <div class="form-text">
                       <small>
-                        <ul class="mb-0 ps-3">
+                        <ul>
                           <li>Your password can't be too similar to your other personal information.</li>
                           <li>Your password must contain at least 8 characters.</li>
-                          <li>Your password can't be a commonly used password.</li>
-                          <li>Your password can't be entirely numeric.</li>
                         </ul>
                       </small>
                     </div>
                   {% endif %}
                 </div>
 
-                <div class="mb-4">
-                  <label for="{{ form.password2.id_for_label }}" class="form-label"><i class="fas fa-lock me-2"></i>Confirm Password</label>
-                  <input type="password" class="form-control form-control-lg {% if form.password2.errors %}is-invalid{% endif %}" id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}" placeholder="Confirm your password" required />
+                <div class="form-group">
+                  <label for="{{ form.password2.id_for_label }}" class="form-label"><i class="fas fa-lock"></i>Confirm Password</label>
+                  <input type="password" class="form-control {% if form.password2.errors %}is-invalid{% endif %}" id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}" placeholder="Confirm your password" required />
                   {% if form.password2.errors %}
                     <div class="invalid-feedback">{{ form.password2.errors.0 }}</div>
                   {% else %}
@@ -75,25 +352,23 @@
                 </div>
 
                 {% if form.non_field_errors %}
-                  <div class="alert alert-danger mb-3">{{ form.non_field_errors.0 }}</div>
+                  <div class="alert alert-danger">{{ form.non_field_errors.0 }}</div>
                 {% endif %}
 
-                <div class="d-grid mb-3">
-                  <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-user-plus me-2"></i>Create Account</button>
-                </div>
+                <button type="submit" class="btn btn-register"><i class="fas fa-user-plus me-2"></i>Create Account</button>
 
-                <div class="text-center">
+                <div class="register-links">
                   <p class="mb-0">
                     Already have an account?
-                    <a href="{% url 'login' %}" class="text-decoration-none">Sign In</a>
+                    <a href="{% url 'login' %}">Sign In</a>
                   </p>
                 </div>
               </form>
             </div>
           </div>
 
-          <div class="text-center mt-4">
-            <a href="{% url 'home' %}" class="text-decoration-none text-muted"><i class="fas fa-arrow-left me-2"></i>Back to Store</a>
+          <div class="back-to-store">
+            <a href="{% url 'home' %}"><i class="fas fa-arrow-left"></i>Back to Store</a>
           </div>
         </div>
       </div>
