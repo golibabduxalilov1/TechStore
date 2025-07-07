@@ -15,14 +15,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
+      /* Set html and body to full height */
+      html,
+      body {
+        height: 100%;
+      }
+      
       body {
         font-family: 'Playfair Display', sans-serif !important;
+        min-height: 100vh;
       }
+      
+      /* Main content should grow to fill available space */
+      main {
+        flex: 1;
+      }
+      
       /* Footer */
       .footer {
         background-color: #222;
         color: #aaa;
         padding: 60px 0 30px;
+        margin-top: auto; /* Push footer to bottom */
       }
       
       .footer-content {
@@ -41,6 +55,7 @@
       
       .footer-section ul {
         list-style: none;
+        padding: 0;
       }
       
       .footer-section li {
@@ -107,6 +122,14 @@
       .subscribe-btn:hover {
         background-color: #5c68c8;
       }
+      
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
     </style>
 
     {% block extra_css %}
@@ -145,7 +168,7 @@
               <li class="nav-item">
                 <form method="POST" action="{% url 'logout' %}" class="d-inline">
                   {% csrf_token %}
-                  <button type="submit" class="nav-link">Logout</button>
+                  <button type="submit" class="nav-link btn btn-link text-light">Logout</button>
                 </form>
               </li>
             {% else %}
@@ -179,6 +202,7 @@
 
       {% endblock %}
     </main>
+
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
