@@ -1,7 +1,12 @@
 {% extends 'store/_base.html' %}
+{% load static %}
 
 {% block title %}
   Shopping Cart - Electronics Shop
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
 {% endblock %}
 
 {% block content %}

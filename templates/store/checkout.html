@@ -1,7 +1,12 @@
 {% extends 'store/_base.html' %}
+{% load static %}
 
 {% block title %}
   Checkout - Electronics Shop
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
 {% endblock %}
 
 {% block content %}

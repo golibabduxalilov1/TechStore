@@ -1,8 +1,13 @@
 <!-- home.html -->
 {% extends 'store/_base.html' %}
+{% load static %}
 
 {% block title %}
   Home - Fashion Store
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}" />
 {% endblock %}
 
 {% block content %}

@@ -5,6 +5,10 @@
   Order #{{ order.id }} - Electronics Shop
 {% endblock %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/order_detail.css' %}" />
+{% endblock %}
+
 {% block content %}
   <!-- Order Details Section -->
   <section class="order-section">
