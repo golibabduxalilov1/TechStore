@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-bfw^5ib-7(#*a*_l3m@zxi#9w8$29j88l2@)337u8$1z2*^zyw"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["16.170.201.53"]
 
 
 # Application definition
@@ -65,10 +65,15 @@ WSGI_APPLICATION = "electronics_shop.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "techstore_db",
+        "USER": "postgres",
+        "PASSWORD": "admin123",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
+
 
 
 # Password validation
